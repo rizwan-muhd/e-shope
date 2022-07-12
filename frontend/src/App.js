@@ -1,34 +1,35 @@
-import data from './data';
+
+import React from 'react';
+import { BrowserRouter as Router,Link,Route,Routes } from 'react-router-dom'
+import HomeScreen from './screen/HomeScreen';
+import ProductScreen from './screen/ProductScreen';
+import Navbar from 'react-bootstrap/Navbar'
+import LinkCondainer from 'rae'
 
 
 function App() {
   return (
-    <div className="App">
-      <header>
-        <a href="/">E-shope</a>
+    <Router>
+      <div>
+        <header>
+          <Navbar bg="dark" varient="dark">
+            <Container>
+              <LinkContainer to="/">
+              <Navbar.Brand>E-shope</Navbar.Brand>
+              </LinkContainer>
+              
+            </Container>
+          </Navbar>
       </header>
-      <main>
-        <h1>Featured Products</h1>
-        <div className="products">
-            {data.products.map(product=>(
-              <div className="product" key={product.slug}>
-                <a href={`/product/${product.slug}`}>
-                  <img src={product.img} alt={product.name} />
-                  </a>
-                <div className="product-info">
-                  <a href={`/product/${product.slug}`}>
-                    <p><strong>{product.name}</strong></p>
-                    </a>
-                  <p>{product.prize}</p>
-                  <button>Add to cart</button>
-             </div>
-        </div>))
-
-        }
-        </div>
-        </main>
-    </div>
-  );
-}
+         <main>
+          <Routes>
+               <Route path='/product/:slug' element={<ProductScreen/> } />
+               <Route path="/" element={<HomeScreen />} />
+            </Routes>
+         </main>
+       </div>
+      </Router>
+      );
+     }
 
 export default App;
